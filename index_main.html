@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CREDIT SCORE CLASSIFICATION</title>
+</head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #555;
+}
+
+</style>
+<body>
+  <h1>Predict Credit Score</h1>
+  <form action="{{ url_for('predict') }}" method="POST">
+
+    <label for="Age">Age</label>
+    <input type="number" name="Age" required><br><br>
+    <label for="Annual_Income">Annual_Income</label>
+    <input type="number" name="Annual_Income" required><br><br>
+    <label for="Monthly_Inhand_Salary">Monthly_Inhand_Salary</label>
+    <input type="number" name="Monthly_Inhand_Salary" required><br><br>
+    <label for="Num_Bank_Accounts">Num_Bank_Accounts</label>
+    <input type="number" name="Num_Bank_Accounts" required><br><br>
+    <label for="Num_Credit_Card">Num_Credit_Card</label>
+    <input type="number" name="Num_Credit_Card" required><br><br>
+    <label for="Interest_Rate">Interest_Rate</label>
+    <input type="number" name="Interest_Rate" required><br><br>       
+    <label for="Num_of_Loan">Num_of_Loan</label>
+    <input type="number" name="Num_of_Loan" required><br><br>
+    <label for="Delay_from_due_date">Delay_from_due_date</label>      
+    <input type="number" name="Delay_from_due_date" required><br><br> 
+    <label for="Num_of_Delayed_Payment">Num_of_Delayed_Payment</label>
+    <input type="number" name="Num_of_Delayed_Payment" required><br><br>
+    <label for="Changed_Credit_Limit">Changed_Credit_Limit</label>    
+    <input type="number" name="Changed_Credit_Limit" required><br><br>
+    <label for="Num_Credit_Inquiries">Num_Credit_Inquiries</label>    
+    <input type="number" name="Num_Credit_Inquiries" required><br><br>
+    <label for="Outstanding_Debt">Outstanding_Debt</label>
+    <input type="number" name="Outstanding_Debt" required><br><br>    
+    <label for="Credit_Utilization_Ratio">Credit_Utilization_Ratio</label>
+    <input type="number" name="Credit_Utilization_Ratio" required><br><br>
+    <label for="Credit_History_Age">Credit_History_Age</label>        
+    <input type="number" name="Credit_History_Age" required><br><br>  
+    <label for="Total_EMI_per_month">Total_EMI_per_month</label>      
+    <input type="number" name="Total_EMI_per_month" required><br><br> 
+    <label for="Amount_invested_monthly">Amount_invested_monthly</label>
+    <input type="number" name="Amount_invested_monthly" required><br><br>
+    <label for="Monthly_Balance">Monthly_Balance</label>
+    <input type="number" name="Monthly_Balance" required><br><br>     
+    <label for="Occupation_Accountant">Occupation_Accountant</label>  
+    <input type="number" name="Occupation_Accountant" required><br><br>
+    <label for="Occupation_Architect">Occupation_Architect</label>    
+    <input type="number" name="Occupation_Architect" required><br><br>
+    <label for="Occupation_Developer">Occupation_Developer</label>    
+    <input type="number" name="Occupation_Developer" required><br><br>
+    <label for="Occupation_Doctor">Occupation_Doctor</label>
+    <input type="number" name="Occupation_Doctor" required><br><br>   
+    <label for="Occupation_Engineer">Occupation_Engineer</label>      
+    <input type="number" name="Occupation_Engineer" required><br><br> 
+    <label for="Occupation_Entrepreneur">Occupation_Entrepreneur</label>
+    <input type="number" name="Occupation_Entrepreneur" required><br><br>
+    <label for="Occupation_Journalist">Occupation_Journalist</label>  
+    <input type="number" name="Occupation_Journalist" required><br><br>
+    <label for="Occupation_Lawyer">Occupation_Lawyer</label>
+    <input type="number" name="Occupation_Lawyer" required><br><br>   
+    <label for="Occupation_Manager">Occupation_Manager</label>        
+    <input type="number" name="Occupation_Manager" required><br><br>  
+    <label for="Occupation_Mechanic">Occupation_Mechanic</label>      
+    <input type="number" name="Occupation_Mechanic" required><br><br> 
+    <label for="Occupation_Media_Manager">Occupation_Media_Manager</label>
+    <input type="number" name="Occupation_Media_Manager" required><br><br>
+    <label for="Occupation_Musician">Occupation_Musician</label>      
+    <input type="number" name="Occupation_Musician" required><br><br> 
+    <label for="Occupation_Scientist">Occupation_Scientist</label>    
+    <input type="number" name="Occupation_Scientist" required><br><br>
+    <label for="Occupation_Teacher">Occupation_Teacher</label>        
+    <input type="number" name="Occupation_Teacher" required><br><br>  
+    <label for="Occupation_Writer">Occupation_Writer</label>
+    <input type="number" name="Occupation_Writer" required><br><br>   
+    <label for="Payment_Behaviour_High_spent_Large_value_payments">Payment_Behaviour_High_spent_Large_value_payments</label>
+    <input type="number" name="Payment_Behaviour_High_spent_Large_value_payments" required><br><br>
+    <label for="Payment_Behaviour_High_spent_Medium_value_payments">Payment_Behaviour_High_spent_Medium_value_payments</label>
+    <input type="number" name="Payment_Behaviour_High_spent_Medium_value_payments" required><br><br>
+    <label for="Payment_Behaviour_High_spent_Small_value_payments">Payment_Behaviour_High_spent_Small_value_payments</label>
+    <input type="number" name="Payment_Behaviour_High_spent_Small_value_payments" required><br><br>
+    <label for="Payment_Behaviour_Low_spent_Large_value_payments">Payment_Behaviour_Low_spent_Large_value_payments</label>
+    <input type="number" name="Payment_Behaviour_Low_spent_Large_value_payments" required><br><br>
+    <label for="Payment_Behaviour_Low_spent_Medium_value_payments">Payment_Behaviour_Low_spent_Medium_value_payments</label>
+    <input type="number" name="Payment_Behaviour_Low_spent_Medium_value_payments" required><br><br>
+    <label for="Payment_Behaviour_Low_spent_Small_value_payments">Payment_Behaviour_Low_spent_Small_value_payments</label>
+    <input type="number" name="Payment_Behaviour_Low_spent_Small_value_payments" required><br><br>
+    <label for="Type_of_Loan_encoded">Type_of_Loan_encoded</label>    
+    <input type="number" name="Type_of_Loan_encoded" required><br><br>
+    <label for="Credit_Mix_encoded">Credit_Mix_encoded {'Good': 0, 'Poor': 1, 'Standard': 2}</label>        
+    <input type="number" name="Credit_Mix_encoded" required><br><br>  
+    <label for="Payment_of_Min_Amount_encoded">Payment_of_Min_Amount_encoded {'Good': 0, 'Poor': 1, 'Standard': 2}</label>
+    <input type="number" name="Payment_of_Min_Amount_encoded" required><br><br>
+    <label for="Quarter_1">Quarter_1</label>
+    <input type="number" name="Quarter_1" required><br><br>
+    <label for="Quarter_2">Quarter_2</label>
+    <input type="number" name="Quarter_2" required><br><br>
+    <label for="Quarter_3">Quarter_3</label>
+    <input type="number" name="Quarter_3" required><br><br>
+    
+    
+    <button type="submit">Predict Credit Score</button>
+  </form>
+</body>
+</html>
